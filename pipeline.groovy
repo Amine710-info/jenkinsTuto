@@ -22,7 +22,7 @@ pipeline {
                 always  {
                     junit '**/target/surefire-reports/TEST-*.xml'
                     archiveArtifacts 'target/*.jar'
-                },
+                }
                  changed {
                    emailext attachLog: true,  
                     body: "Please go to (build ${BUILD_URL}) ", 
