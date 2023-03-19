@@ -12,18 +12,18 @@ pipeline {
         stage('Build') {
             steps {
                 // Run Maven on a Unix agent.
-          //      sh './mvnw clean package'
-        sh 'true'
+                sh './mvnw clean package'
+    
             // To run Maven on a Windows agent, use
             // bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
 
             post {
                 always  {
-                //    junit '**/target/surefire-reports/TEST-*.xml'
-                  //  archiveArtifacts 'target/*.jar'
-                /* }
-                 changed { */
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                },
+                 changed {
                    emailext attachLog: true,  
                     body: "Please go to (build ${BUILD_URL}) ", 
                     recipientProviders: [requestor(), upstreamDevelopers()],
